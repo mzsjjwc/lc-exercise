@@ -5,6 +5,8 @@
  * [27] 移除元素
  */
 
+package main
+
 // @lc code=start
 func removeElement(nums []int, val int) int {
 	//因为如果正序遍历,如果删除,会影响后面的索引值
@@ -29,4 +31,3 @@ func removeElement(nums []int, val int) int {
 // @lcpr case=end
 
 */
-
