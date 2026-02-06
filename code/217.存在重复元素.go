@@ -4,6 +4,7 @@
  *
  * [217] 存在重复元素
  */
+package main
 
 // @lc code=start
 func containsDuplicate(nums []int) bool {
@@ -34,4 +35,3 @@ func containsDuplicate(nums []int) bool {
 // @lcpr case=end
 
 */
-
