@@ -14,6 +14,14 @@ type NumArray struct {
 
 func Constructor(nums []int) NumArray {
 	//初始化时提前计算好,数组长度取多一个是为了避免数组越界(-1)
+	//sums里面,索引为几,就是前多少个的和
+	//比如给索引1,3,那么最终对应就是sums[4]-sums[1]也就是前4个元素的和减去前一个元素的和
+	//sum-index 0 1 2 3 4 5
+	//sum-value 0 2 3 6 8 13
+	//num-index 0 1 2 3 4
+	//num-value 2 1 3 2 5
+	//循环来写就是1+3+2=6
+	//如果用前缀和就是sums[4]-sums[1]=8-2=6
 	sums := make([]int, len(nums)+1)
 	for i := 0; i < len(nums); i++ {
 		sums[i+1] = nums[i] + sums[i]
