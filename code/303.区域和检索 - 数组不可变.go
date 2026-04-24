@@ -9,19 +9,20 @@ package main
 
 // @lc code=start
 type NumArray struct {
-	nums []int
+	sums []int
 }
 
 func Constructor(nums []int) NumArray {
-	return NumArray{nums}
+	//初始化时提前计算好,数组长度取多一个是为了避免数组越界(-1)
+	sums := make([]int, len(nums)+1)
+	for i := 0; i < len(nums); i++ {
+		sums[i+1] = nums[i] + sums[i]
+	}
+	return NumArray{sums}
 }
 
 func (this *NumArray) SumRange(left int, right int) int {
-	sum := 0
-	for i := left; i <= right; i++{
-		sum += this.nums[i]
-	}
-	return sum
+	return this.sums[right+1] - this.sums[left]
 }
 
 /**
