@@ -13,6 +13,9 @@ func subarraysDivByK(nums []int, k int) int {
 	//(pre[i] - pre[j-1]) % k == 0
 	//根据同余定理,PrefixSum[j] \pmod K == PrefixSum[i-1] \pmod K
 	//也就是说只要这两个前缀和的余数相同,则成立
+	//关键思路:需要找到(pre[i] - pre[j-1]) % k == 0的两个前缀和
+	//然后需要把公式变体为pre[i]%k == pre[j-1]%k,也就是两者余数相等
+	//找两者余数相等的前缀和,遍历,然后找余数相等的前缀和出现次数,加起来,就可以了,详细可以看724题目
 	preSum := 0
 	count := 0
 	m := make(map[int]int)
