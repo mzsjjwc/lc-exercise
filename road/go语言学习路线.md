@@ -16,7 +16,7 @@ Golang 云原生开发工程师学习图谱
 │       ├── 数组、链表、栈、队列、哈希表
 │       └── 常见排序与查找算法 (冒泡、快排、二分查找)
 │
-├── 2. Go 语言核心(学习资源:入门https://studygolang.com/ 进阶https://draven.co/golang/, 视频:B站 UP主“幼麟实验室”)
+├── 2. Go 语言核心(学习资源:入门https://studygolang.com/,https://golang.halfiisland.com/guide.html 进阶https://draven.co/golang/, 视频:B站 UP主“幼麟实验室”)
 │   ├── 基础语法
 │   │   ├── 变量、常量与基本数据类型
 │   │   ├── 控制流程 (if、for、switch)
