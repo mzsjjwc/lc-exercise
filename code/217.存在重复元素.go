@@ -4,16 +4,15 @@
  *
  * [217] 存在重复元素
  */
-package main
 
 // @lc code=start
 func containsDuplicate(nums []int) bool {
-	hasMap := make(map[int]struct{}, len(nums))
+	numMap := make(map[int]interface{}, len(nums)) //预分配内存节省开销
 	for _, v := range nums {
-		if _, ok := hasMap[v]; ok {
-			return true //如果有重复的,就提前跳出
+		if _, ok := numMap[v]; ok {
+			return true
 		} else {
-			hasMap[v] = struct{}{} //这里是空结构体字面量可以用[]int{}来类比,[]int可以替换成struct{},这样理解就可以了
+			numMap[v] = struct{}{}
 		}
 	}
 	return false
