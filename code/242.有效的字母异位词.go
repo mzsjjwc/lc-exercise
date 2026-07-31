@@ -11,24 +11,24 @@ import "sort"
 
 // @lc code=start
 func isAnagram(s string, t string) bool {
-	chars1 := []rune(s)
-	chars2 := []rune(t)
-	if len(chars1) != len(chars2) {
-		return false
-	}
-	sort.Slice(chars1, func(i, j int) bool {
-		return chars1[i] < chars1[j]
-	})
-	sort.Slice(chars2, func(i, j int) bool {
-		return chars2[i] < chars2[j]
-	})
-	length := len(chars1)
-	for a := 0; a < length; a++ {
-		if chars1[a] != chars2[a] {
+	c1 := statistic(s)
+	c2 := statistic(t)
+	for i:=0;i<26;i++{
+		if c1[i] != c2[i]{
 			return false
 		}
 	}
 	return true
+	
+}
+
+func statistic(str string)[]int{
+	count := make([]int,26)
+	for _,v:=range(str){
+		index := v-'a'
+		count[index]++
+	}
+	return count
 }
 
 // @lc code=end

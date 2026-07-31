@@ -8,18 +8,17 @@ package main
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
-	//先将数组转化成map
+	//创建hashmap
 	hasMap := make(map[int]int, len(nums))
-	//然后直接找taget－当前值是否已经在map中了，如果找到了则直接返回下标
 	for i, v := range nums {
-		temp := target - v
-		if val, ok := hasMap[temp]; ok {
-			return []int{i, val}
+		//看看map里有没有目标值，如果有就返回没有就加进去当前的值和索引
+		if val, ok := hasMap[target-v]; ok {
+			return []int{val, i}
 		} else {
 			hasMap[v] = i
 		}
 	}
-	return []int{}
+	return nil
 }
 
 // @lc code=end
