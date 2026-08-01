@@ -10,32 +10,23 @@ import "sort"
 
 // @lc code=start
 func groupAnagrams(strs []string) [][]string {
-	//思路是,给每一个字符串进行排序,以排序后的字符串为键
-	//值是字符串数组
+	//思路：利用排序后的字符串作为键，将异位词收集到同一个key下
 	hasMap := make(map[string][]string)
 	for _, v := range strs {
-		temp := []byte(v)
-		//排序
-		sort.Slice(temp, func(i, j int) bool {
-			return temp[i] < temp[j]
+		r := []rune(v) 
+		sort.Slice(r, func(i, j int) bool {
+			return r[i] < r[j]
 		})
-		tempStr := string(temp)
-		//如果存在,则添加,否则新建
-		if val, ok := hasMap[tempStr]; ok {
-			hasMap[tempStr] = append(val, v)
-		} else {
-			hasMap[tempStr] = []string{v}
-		}
+		newStr := string(r)
+		hasMap[newStr] = append(hasMap[newStr], v)
+
 	}
+	//二维数组，每一个元素里面有一个[]string,
+	result := make([][]string,0,len(hasMap))
+	for _,vv := range(hasMap){
+		result = append(result,vv)
 
-	result := make([][]string, len(hasMap))
-
-	j := 0
-	for _, value := range hasMap {
-		result[j] = value
-		j++
 	}
-
 	return result
 
 }
