@@ -29,6 +29,7 @@ func topKFrequent(nums []int, k int) []int {
 		for _, num := range buckets[i] {
 			result = append(result, num)
 			//确保只取k个
+			
 			if len(result) == k {
 				return result
 			}
