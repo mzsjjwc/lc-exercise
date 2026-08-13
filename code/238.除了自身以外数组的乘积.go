@@ -7,25 +7,27 @@
 
 // @lc code=start
 func productExceptSelf(nums []int) []int {
-    left := make([]int, len(nums))
-	left[0] = 1 //由于索引0的元素左边没有元素,乘积为1
-	//先计算出左边每个数的左边乘积(不包含自身)
-	for i := 1; i < len(nums); i++ {
-		//利用前缀积的思想,不重复计算,这里要这样看,每一次遍历都等于上一次的乘积(left[i-1])乘以这一次的乘数(nums[i-1])
-		left[i] = left[i-1] * nums[i-1]
+    //思路是利用前缀和,提前算出两个数组,每个数左侧的乘积,和每个数右侧的乘积
+	//本题目中是要计算除该数字以外的所有数字乘积,所以可以拆分成这个数字左边的所有数字乘积乘以这个数字右边所有数字的乘积
+	//比如说1,2,3,4
+	//2这个位置的,答案应该是左边:1 右边3*4 总的1*3*4=12
+	//那么知道怎么算了之后,开始顺序倒序各一遍即可
+	answerL := make([]int, len(nums))
+	answerL[0] = 1
+	for i := 1; i < len(answerL); i++ {
+		answerL[i] = answerL[i-1] * nums[i-1]
 	}
-	//再和右边每个元素的乘积相乘就能得到每个位置除了自身的乘积,这样只需要算三个循环,时间复杂度为3n,为O(n)
-	//这里需要从右往左,由于最后一个位置的右边乘积为1,所以最后一个位置不变即可
-	right := make([]int, len(nums))
-	right[len(nums)-1] = 1
-	for j := len(nums) - 2; j >= 0; j-- {
-		right[j] = right[j+1] * nums[j+1]
+	answerR := make([]int, len(nums))
+	answerR[len(nums)-1] = 1
+	for k := len(nums) - 2; k >= 0; k-- {
+		answerR[k] = answerR[k+1] * nums[k+1]
 	}
-	result := make([]int, len(nums))
-	for k := 0; k < len(nums); k++ {
-		result[k] = left[k] * right[k]
+	//最后同位置互乘
+	answer := make([]int, len(nums))
+	for index := range nums {
+		answer[index] = answerL[index] * answerR[index]
 	}
-	return result
+	return answer
 }
 // @lc code=end
 
