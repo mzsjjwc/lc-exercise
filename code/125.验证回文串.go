@@ -19,25 +19,41 @@ import (
 
 // @lc code=start
 func isPalindrome(s string) bool {
-	//思路是直接将其转换成两个数组,然后比较是否完全一致,需要提前处理字符串空格,大小写,还有非字母数字字符
-	s = strings.ToLower(strings.ReplaceAll(s, " ", ""))
-	reg := regexp.MustCompile(`[^a-zA-Z0-9]+`) //定义正则
-	s = reg.ReplaceAllString(s, "")            //替换
-	//打印试试
-	fmt.Printf("s = %s\n", s)
-	chars := []rune(s)
-	length := len(chars)
-	start := 0
-	end := length - 1
-	for start < length && end >= 0 {
-		if chars[start] != chars[end] {
+	if len(s) == 0 {
+		return true
+	}
+	p := 0
+	q := len(s) - 1
+	for p < q {
+		for p < q && !isNumOrLetter(s[p]) {
+			p++
+		}
+		for p < q && !isNumOrLetter(s[q]) {
+			q--
+		}
+		if toLetter(s[p]) != toLetter(s[q]) {
 			return false
 		}
-		start++
-		end--
+		p++
+		q--
 	}
 	return true
 }
+
+func toLetter(t byte) byte {
+	if t >= 'A' && t <= 'Z' {
+		t = t + ('a' - 'A')
+	}
+	return t
+}
+
+func isNumOrLetter(t byte) bool {
+	if t >= 'A' && t <= 'Z' || t >= 'a' && t <= 'z' || t >= '0' && t <= '9' {
+		return true
+	}
+	return false
+}
+
 
 // @lc code=end
 

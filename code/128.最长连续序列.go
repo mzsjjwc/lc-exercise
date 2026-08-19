@@ -7,30 +7,28 @@
 
 // @lc code=start
 func longestConsecutive(nums []int) int {
-	//不能排序,只能用空间换时间
-	//转换成map
+	//思路：因为是未排序，并且要求时间复杂度O(n)，那就不能直接排序了，只能用其他方法
+	//可以转换成哈希表，然后找第一个，跳过所有非第一个元素的
 	hasMap := make(map[int]bool)
+	fmt.Println(hasMap)
 	for _, v := range nums {
 		hasMap[v] = true
 	}
-
-	//定义最长length
+	fmt.Println(hasMap)
 	maxLength := 0
-
-	//开始遍历map,搜索最长序列
-	for k := range hasMap {
-		if !hasMap[k-1] { //这判断,只判断第一个,如果不是第一个就直接跳过了
+	for key := range hasMap {
+		if !hasMap[key-1] {
+			tempKey := key
 			count := 0
-			for hasMap[k] {
+			for hasMap[tempKey] {
 				count++
-				k++
+				tempKey++
 			}
 			if count > maxLength {
 				maxLength = count
 			}
 		}
 	}
-
 	return maxLength
 }
 // @lc code=end
