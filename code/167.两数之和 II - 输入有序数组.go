@@ -9,20 +9,19 @@ package main
 
 // @lc code=start
 func twoSum(numbers []int, target int) []int {
-	//思路:这里利用有序数组来用双指针,因为是非递减数组,所以往左是变小,往右是变大
-	//也可以用哈希表,但是时间复杂度和空间复杂度都比这个高,现在这个是O(1)
-	left := 0
-	right := len(numbers)-1
-	for left<right{
-		if numbers[left] + numbers[right] < target{
-			left++
-		}else if numbers[left] + numbers[right] > target{
-			right--
-		}else{
-			return []int{left+1,right+1}
+		//可以用哈希表做,也可以用双指针,双指针空间复杂度更低,时间复杂度和哈希表一样都是On,空间复杂度则是O1,思路是,因为是递增数组,所以往左就是减小,往右就是增大
+	p := 0
+	q := len(numbers) - 1
+	for p < q {
+		if numbers[p]+numbers[q] > target {
+			q--
+		} else if numbers[p]+numbers[q] < target {
+			p++
+		} else if numbers[p]+numbers[q] == target {
+			return []int{p + 1, q + 1}
 		}
 	}
-	return []int{-1,-1}
+	return nil
 }
 
 // @lc code=end
